@@ -1,7 +1,12 @@
 aid: state-farm
-url: https://raw.githubusercontent.com/api-evangelist/state-farm/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/state-farm/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.state-farm.com
+description: >-
+  State Farm is the largest property and casualty insurance provider in the United
+  States, offering auto, home, life, health, and other insurance products as well
+  as banking and financial services.
