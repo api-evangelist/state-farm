@@ -1,0 +1,141 @@
+name: State Farm Vocabulary
+description: >-
+  Domain vocabulary for State Farm insurance products, partner integrations,
+  policy management, and claims operations.
+version: 1.0.0
+terms:
+  - term: PolicyNumber
+    definition: >-
+      A unique identifier assigned by State Farm to an insurance policy,
+      typically formatted as NNN-NNNN-XNN where N is numeric and X is alphabetic.
+    related:
+      - Policy
+      - Insured
+      - Coverage
+
+  - term: RentersInsurance
+    definition: >-
+      An insurance policy that protects tenants from financial loss due to damage
+      or theft of personal property, personal liability for accidents, and additional
+      living expenses if the rental unit becomes uninhabitable.
+    related:
+      - PersonalProperty
+      - Liability
+      - Deductible
+
+  - term: PersonalProperty
+    definition: >-
+      Movable items owned by the policyholder that are covered under a renters or
+      homeowners insurance policy, including furniture, electronics, clothing, and
+      other personal possessions.
+    related:
+      - Coverage
+      - Limit
+      - Replacement Cost
+
+  - term: Liability
+    definition: >-
+      Coverage that protects the policyholder from financial responsibility for
+      bodily injury or property damage accidentally caused to others, including
+      legal defense costs.
+    related:
+      - PersonalLiability
+      - MedicalPayments
+      - Umbrella
+
+  - term: Deductible
+    definition: >-
+      The amount the policyholder must pay out of pocket before State Farm pays
+      a covered claim. Higher deductibles generally result in lower premiums.
+    related:
+      - Premium
+      - Claim
+      - Coverage
+
+  - term: Premium
+    definition: >-
+      The amount paid to State Farm for insurance coverage, typically quoted
+      on monthly or annual basis. Premium is determined by coverage levels,
+      deductible, location, and other risk factors.
+    related:
+      - Deductible
+      - Policy
+      - PaymentFrequency
+
+  - term: EmbeddedInsurance
+    definition: >-
+      Insurance products offered directly within a partner platform's workflow,
+      allowing customers to obtain coverage without navigating to a separate
+      insurance website. State Farm's Partner Gateway enables embedded insurance.
+    related:
+      - PartnerGateway
+      - API
+      - QuoteAndBind
+
+  - term: PartnerGateway
+    definition: >-
+      State Farm's developer platform (developer.statefarm.com) that provides
+      APIs enabling third-party partners to integrate State Farm insurance
+      products into their own applications and workflows.
+    related:
+      - API
+      - EmbeddedInsurance
+      - OAuth2
+
+  - term: QuoteAndBind
+    definition: >-
+      The end-to-end process of requesting a premium quote for insurance coverage
+      and subsequently binding that coverage into an active policy. A key workflow
+      enabled by the State Farm Partner Gateway API.
+    related:
+      - Quote
+      - Policy
+      - PartnerGateway
+
+  - term: AdditionalInterest
+    definition: >-
+      A party listed on an insurance policy who has a financial interest in the
+      covered property, such as a landlord, mortgage lender, or property management
+      company. Also called an Additional Insured or Loss Payee depending on context.
+    related:
+      - Policy
+      - Landlord
+      - Lender
+
+  - term: AdditionalLivingExpenses
+    definition: >-
+      Coverage that pays for temporary housing and increased living costs if the
+      insured rental unit becomes uninhabitable due to a covered loss. A standard
+      component of renters insurance.
+    related:
+      - RentersInsurance
+      - Coverage
+      - Claim
+
+  - term: ForwardColateralInsurance
+    definition: >-
+      Insurance obtained by a lender when the borrower fails to maintain required
+      coverage on financed property. State Farm's B2B API helps lenders verify
+      existing coverage to avoid force-placed insurance costs.
+    related:
+      - Lender
+      - B2BPortal
+      - PolicyVerification
+
+  - term: IdentityRestoration
+    definition: >-
+      Optional add-on coverage that helps policyholders recover from identity theft
+      by covering the costs of restoring their identity, including legal fees,
+      credit monitoring, and resolution assistance.
+    related:
+      - RentersInsurance
+      - OptionalCoverage
+
+  - term: MutualCompany
+    definition: >-
+      An insurance company owned by its policyholders rather than shareholders.
+      State Farm Mutual Automobile Insurance Company is a mutual company, meaning
+      profits benefit policyholders through competitive rates and dividends.
+    related:
+      - StateForm
+      - Policyholder

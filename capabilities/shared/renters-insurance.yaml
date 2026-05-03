@@ -1,0 +1,249 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "State Farm Renters Insurance API"
+  description: "Shared capability for the State Farm Renters Insurance API enabling partner quote and policy operations."
+  tags:
+    - Insurance
+    - Renters Insurance
+    - Embedded Insurance
+    - Partner
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STATE_FARM_CLIENT_ID: STATE_FARM_CLIENT_ID
+      STATE_FARM_CLIENT_SECRET: STATE_FARM_CLIENT_SECRET
+
+capability:
+  consumes:
+    - type: http
+      namespace: state-farm-renters
+      baseUri: https://api.statefarm.com/v1
+      description: "State Farm Renters Insurance API"
+      authentication:
+        type: bearer
+        token: "{{STATE_FARM_ACCESS_TOKEN}}"
+      resources:
+        - name: renters-quotes
+          path: /renters/quotes
+          description: "Renters insurance quote operations"
+          operations:
+            - name: create-renters-quote
+              method: POST
+              description: "Create a renters insurance quote"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  propertyAddress: "{{tools.propertyAddress}}"
+                  tenantInfo: "{{tools.tenantInfo}}"
+                  coverageOptions: "{{tools.coverageOptions}}"
+                  effectiveDate: "{{tools.effectiveDate}}"
+
+        - name: renters-quote-detail
+          path: /renters/quotes/{quoteId}
+          description: "Individual quote operations"
+          operations:
+            - name: get-renters-quote
+              method: GET
+              description: "Get renters insurance quote by ID"
+              inputParameters:
+                - name: quoteId
+                  in: path
+                  type: string
+                  required: true
+                  description: "Quote identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: renters-policies
+          path: /renters/policies
+          description: "Renters insurance policy operations"
+          operations:
+            - name: create-renters-policy
+              method: POST
+              description: "Bind a renters insurance policy from a quote"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  quoteId: "{{tools.quoteId}}"
+                  paymentMethod: "{{tools.paymentMethod}}"
+                  paymentFrequency: "{{tools.paymentFrequency}}"
+                  effectiveDate: "{{tools.effectiveDate}}"
+
+        - name: renters-policy-detail
+          path: /renters/policies/{policyNumber}
+          description: "Individual policy operations"
+          operations:
+            - name: get-renters-policy
+              method: GET
+              description: "Get renters insurance policy details"
+              inputParameters:
+                - name: policyNumber
+                  in: path
+                  type: string
+                  required: true
+                  description: "Policy number"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: coverage-options
+          path: /renters/coverage-options
+          description: "Available coverage options"
+          operations:
+            - name: list-coverage-options
+              method: GET
+              description: "List available coverage options and limits"
+              inputParameters:
+                - name: state
+                  in: query
+                  type: string
+                  required: false
+                  description: "US state code"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: state-farm-renters-rest
+      resources:
+        - path: /v1/renters/quotes
+          name: renters-quotes
+          description: "Renters insurance quote operations"
+          operations:
+            - method: POST
+              name: create-renters-quote
+              description: "Create renters quote"
+              call: "state-farm-renters.create-renters-quote"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/renters/quotes/{quoteId}
+          name: renters-quote-detail
+          description: "Quote detail"
+          operations:
+            - method: GET
+              name: get-renters-quote
+              description: "Get quote by ID"
+              call: "state-farm-renters.get-renters-quote"
+              with:
+                quoteId: "rest.quoteId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/renters/policies
+          name: renters-policies
+          description: "Renters policy binding"
+          operations:
+            - method: POST
+              name: create-renters-policy
+              description: "Bind policy from quote"
+              call: "state-farm-renters.create-renters-policy"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/renters/policies/{policyNumber}
+          name: renters-policy-detail
+          description: "Policy detail"
+          operations:
+            - method: GET
+              name: get-renters-policy
+              description: "Get policy by number"
+              call: "state-farm-renters.get-renters-policy"
+              with:
+                policyNumber: "rest.policyNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/renters/coverage-options
+          name: coverage-options
+          description: "Coverage options"
+          operations:
+            - method: GET
+              name: list-coverage-options
+              description: "List coverage options"
+              call: "state-farm-renters.list-coverage-options"
+              with:
+                state: "rest.state"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: state-farm-renters-mcp
+      transport: http
+      tools:
+        - name: create-renters-quote
+          description: "Create a State Farm renters insurance quote for a rental property"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "state-farm-renters.create-renters-quote"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-renters-quote
+          description: "Retrieve a previously created renters insurance quote"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "state-farm-renters.get-renters-quote"
+          with:
+            quoteId: "tools.quoteId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: bind-renters-policy
+          description: "Bind a renters insurance policy from an accepted quote"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "state-farm-renters.create-renters-policy"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-renters-policy
+          description: "Get status and details of a State Farm renters insurance policy"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "state-farm-renters.get-renters-policy"
+          with:
+            policyNumber: "tools.policyNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-coverage-options
+          description: "List available renters insurance coverage options and limits for a state"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "state-farm-renters.list-coverage-options"
+          with:
+            state: "tools.state"
+          outputParameters:
+            - type: object
+              mapping: "$."

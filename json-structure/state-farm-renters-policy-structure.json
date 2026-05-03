@@ -1,0 +1,37 @@
+{
+  "name": "Renters Insurance Policy",
+  "description": "State Farm renters insurance policy structure",
+  "properties": [
+    { "name": "policyNumber", "type": "string", "description": "State Farm policy number" },
+    { "name": "status", "type": "string", "description": "Policy status (ACTIVE, PENDING, CANCELLED, EXPIRED, LAPSED)" },
+    { "name": "effectiveDate", "type": "date", "description": "Coverage start date" },
+    { "name": "expirationDate", "type": "date", "description": "Coverage end date" },
+    { "name": "annualPremium", "type": "number", "description": "Annual premium in USD" },
+    { "name": "monthlyPremium", "type": "number", "description": "Monthly premium in USD" },
+    { "name": "insuredName", "type": "string", "description": "Primary insured full name" },
+    {
+      "name": "propertyAddress",
+      "type": "object",
+      "description": "Insured property address",
+      "properties": [
+        { "name": "street", "type": "string", "description": "Street address with unit" },
+        { "name": "city", "type": "string", "description": "City" },
+        { "name": "state", "type": "string", "description": "US state code" },
+        { "name": "zipCode", "type": "string", "description": "ZIP code" }
+      ]
+    },
+    {
+      "name": "coverageSummary",
+      "type": "object",
+      "description": "Coverage selections",
+      "properties": [
+        { "name": "personalPropertyLimit", "type": "integer", "description": "Personal property limit in USD" },
+        { "name": "liabilityLimit", "type": "integer", "description": "Liability limit in USD" },
+        { "name": "medicalPaymentsLimit", "type": "integer", "description": "Medical payments limit in USD" },
+        { "name": "deductible", "type": "integer", "description": "Deductible amount in USD" },
+        { "name": "additionalLivingExpenses", "type": "boolean", "description": "ALE coverage included" },
+        { "name": "identityRestorationCoverage", "type": "boolean", "description": "Identity restoration included" }
+      ]
+    }
+  ]
+}

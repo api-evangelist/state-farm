@@ -1,0 +1,169 @@
+extends:
+  - spectral:oas
+
+rules:
+
+  state-farm-info-contact-required:
+    description: All State Farm APIs must include contact information
+    message: API info object must include contact with URL pointing to developer portal
+    severity: error
+    given: $.info
+    then:
+      - field: contact
+        function: truthy
+      - field: contact.url
+        function: truthy
+
+  state-farm-operation-summary-title-case:
+    description: Operation summaries must use Title Case per State Farm API conventions
+    message: Operation summary must use Title Case
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][a-zA-Z0-9]*(?: [A-Z][a-zA-Z0-9]*)*$'
+
+  state-farm-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    message: OperationId must be camelCase
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]*$'
+
+  state-farm-operation-tags-required:
+    description: All operations must have tags
+    message: Operation must include at least one tag
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  state-farm-operation-description-required:
+    description: All operations must have a description
+    message: Operation must include a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  state-farm-path-versioned:
+    description: All API paths must start with a version prefix /v1
+    message: Paths must begin with /v1/ version prefix
+    severity: error
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^/v[0-9]+/'
+
+  state-farm-path-kebab-case:
+    description: Path segments must use kebab-case
+    message: Path segments must use kebab-case (lowercase, hyphens)
+    severity: error
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^(/v[0-9]+)(/[a-z][a-z0-9-]*|/{[a-zA-Z][a-zA-Z0-9]*})*/?$'
+
+  state-farm-oauth2-security:
+    description: All insurance APIs must use OAuth2 authentication
+    message: API must define OAuth2 security scheme
+    severity: error
+    given: $.components.securitySchemes[*]
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: '^oauth2$'
+
+  state-farm-security-applied:
+    description: Global security must be applied at the API level
+    message: API must apply security globally or per operation
+    severity: error
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  state-farm-response-201-post:
+    description: POST operations that create resources must return 201
+    message: POST operations creating resources should return 201 Created
+    severity: warn
+    given: $.paths[*].post.responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required:
+                - '201'
+            - required:
+                - '200'
+
+  state-farm-response-error-codes:
+    description: Operations must define error response codes
+    message: Operations should define 400, 401, and appropriate error codes
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required:
+                - '400'
+            - required:
+                - '401'
+            - required:
+                - '404'
+
+  state-farm-schema-description:
+    description: All schema components must have descriptions
+    message: Schema component must include a description
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  state-farm-parameter-required-flag:
+    description: All parameters must explicitly declare whether they are required
+    message: Parameter must include explicit required field
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: required
+      function: defined
+
+  state-farm-state-code-pattern:
+    description: State code fields should validate US state abbreviations
+    message: State fields should use a 2-letter uppercase pattern
+    severity: info
+    given: $.components.schemas[*].properties.state
+    then:
+      field: pattern
+      function: truthy
+
+  state-farm-request-body-content-type:
+    description: Request bodies must use application/json content type
+    message: Request body must specify application/json content type
+    severity: error
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - application/json

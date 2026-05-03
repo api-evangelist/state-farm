@@ -1,0 +1,176 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "State Farm Embedded Insurance"
+  description: >-
+    Workflow capability for State Farm embedded insurance integrations. Enables property
+    management platforms, real estate applications, and partner aggregators to embed
+    State Farm renters insurance quoting and policy binding directly into their tenant
+    onboarding and lease workflows. Supports AI-assisted insurance recommendation,
+    coverage configuration, and policy management.
+  tags:
+    - Insurance
+    - Renters Insurance
+    - Embedded Insurance
+    - Partner
+    - Property Management
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      STATE_FARM_CLIENT_ID: STATE_FARM_CLIENT_ID
+      STATE_FARM_CLIENT_SECRET: STATE_FARM_CLIENT_SECRET
+
+capability:
+  consumes:
+    - import: state-farm-renters
+      location: ./shared/renters-insurance.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: state-farm-embedded-insurance-api
+      description: "Unified REST API for State Farm embedded insurance partner workflows."
+      resources:
+        - path: /v1/renters/coverage-options
+          name: coverage-options
+          description: "Available coverage options for tenants"
+          operations:
+            - method: GET
+              name: list-coverage-options
+              description: "Get available renters insurance coverage options by state"
+              call: "state-farm-renters.list-coverage-options"
+              with:
+                state: "rest.state"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renters/quotes
+          name: renters-quotes
+          description: "Renters insurance quote operations"
+          operations:
+            - method: POST
+              name: create-renters-quote
+              description: "Create a renters insurance quote for a tenant"
+              call: "state-farm-renters.create-renters-quote"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renters/quotes/{quoteId}
+          name: renters-quote-detail
+          description: "Quote retrieval"
+          operations:
+            - method: GET
+              name: get-renters-quote
+              description: "Retrieve a renters insurance quote"
+              call: "state-farm-renters.get-renters-quote"
+              with:
+                quoteId: "rest.quoteId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renters/policies
+          name: renters-policies
+          description: "Renters insurance policy binding"
+          operations:
+            - method: POST
+              name: bind-renters-policy
+              description: "Bind a renters insurance policy from a quote"
+              call: "state-farm-renters.create-renters-policy"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/renters/policies/{policyNumber}
+          name: renters-policy-detail
+          description: "Policy status and details"
+          operations:
+            - method: GET
+              name: get-renters-policy
+              description: "Get renters insurance policy status and coverage"
+              call: "state-farm-renters.get-renters-policy"
+              with:
+                policyNumber: "rest.policyNumber"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: state-farm-embedded-insurance-mcp
+      transport: http
+      description: "MCP server for AI-assisted State Farm embedded insurance workflows for property management platforms."
+      tools:
+        - name: list-renters-coverage-options
+          description: >-
+            List available State Farm renters insurance coverage options and limits
+            for a specific US state, including personal property limits, liability
+            limits, deductible choices, and optional coverages.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "state-farm-renters.list-coverage-options"
+          with:
+            state: "tools.state"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-renters-quote
+          description: >-
+            Create a State Farm renters insurance quote for a tenant given their
+            property address, personal information, and desired coverage selections.
+            Returns the quoted premium and coverage summary.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "state-farm-renters.create-renters-quote"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-renters-quote
+          description: >-
+            Retrieve the details and status of a previously created State Farm
+            renters insurance quote by its quote ID.
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "state-farm-renters.get-renters-quote"
+          with:
+            quoteId: "tools.quoteId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: bind-renters-policy
+          description: >-
+            Convert an accepted State Farm renters insurance quote into an active
+            policy. Specify the quote ID, payment method, and payment frequency
+            to complete policy binding.
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "state-farm-renters.create-renters-policy"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-renters-policy-status
+          description: >-
+            Get the current status, coverage details, and premium information
+            for an active State Farm renters insurance policy.
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "state-farm-renters.get-renters-policy"
+          with:
+            policyNumber: "tools.policyNumber"
+          outputParameters:
+            - type: object
+              mapping: "$."

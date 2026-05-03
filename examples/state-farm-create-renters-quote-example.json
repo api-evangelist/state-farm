@@ -1,0 +1,59 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.statefarm.com/v1/renters/quotes",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "propertyAddress": {
+        "street": "123 Main St, Apt 4B",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601"
+      },
+      "tenantInfo": {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "dateOfBirth": "1990-03-15",
+        "email": "jane.smith@email.com",
+        "phone": "555-867-5309"
+      },
+      "coverageOptions": {
+        "personalPropertyLimit": 25000,
+        "liabilityLimit": 100000,
+        "medicalPaymentsLimit": 1000,
+        "deductible": 1000,
+        "additionalLivingExpenses": true,
+        "identityRestorationCoverage": false
+      },
+      "effectiveDate": "2026-06-01"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "quoteId": "QT-2026-789456",
+      "status": "READY",
+      "annualPremium": 186.00,
+      "monthlyPremium": 15.50,
+      "coverageSummary": {
+        "personalPropertyLimit": 25000,
+        "liabilityLimit": 100000,
+        "medicalPaymentsLimit": 1000,
+        "deductible": 1000,
+        "additionalLivingExpenses": true,
+        "identityRestorationCoverage": false
+      },
+      "propertyAddress": {
+        "street": "123 Main St, Apt 4B",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601"
+      },
+      "validUntil": "2026-05-16T23:59:59Z",
+      "quoteNumber": "2026-Q-987654"
+    }
+  }
+}

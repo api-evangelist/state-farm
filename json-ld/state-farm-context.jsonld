@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/",
+    "statefarm": "https://www.statefarm.com/ontology/",
+
+    "RentersInsurancePolicy": "schema:InsurancePolicy",
+    "InsuranceQuote": "schema:InsuranceQuote",
+    "PolicyHolder": "schema:Person",
+    "Address": "schema:PostalAddress",
+    "Coverage": "statefarm:Coverage",
+
+    "policyNumber": {
+      "@id": "statefarm:policyNumber",
+      "@type": "schema:Identifier"
+    },
+    "status": "schema:status",
+    "effectiveDate": {
+      "@id": "schema:validFrom",
+      "@type": "schema:Date"
+    },
+    "expirationDate": {
+      "@id": "schema:validThrough",
+      "@type": "schema:Date"
+    },
+    "annualPremium": {
+      "@id": "statefarm:annualPremium",
+      "@type": "schema:Number"
+    },
+    "monthlyPremium": {
+      "@id": "statefarm:monthlyPremium",
+      "@type": "schema:Number"
+    },
+    "insuredName": "schema:name",
+    "street": "schema:streetAddress",
+    "city": "schema:addressLocality",
+    "state": "schema:addressRegion",
+    "zipCode": "schema:postalCode",
+    "personalPropertyLimit": {
+      "@id": "statefarm:personalPropertyLimit",
+      "@type": "schema:MonetaryAmount"
+    },
+    "liabilityLimit": {
+      "@id": "statefarm:liabilityLimit",
+      "@type": "schema:MonetaryAmount"
+    },
+    "medicalPaymentsLimit": {
+      "@id": "statefarm:medicalPaymentsLimit",
+      "@type": "schema:MonetaryAmount"
+    },
+    "deductible": {
+      "@id": "schema:deductible",
+      "@type": "schema:MonetaryAmount"
+    },
+    "additionalLivingExpenses": "statefarm:additionalLivingExpenses",
+    "identityRestorationCoverage": "statefarm:identityRestorationCoverage",
+    "quoteId": "schema:identifier",
+    "validUntil": {
+      "@id": "schema:validThrough",
+      "@type": "schema:DateTime"
+    },
+    "firstName": "schema:givenName",
+    "lastName": "schema:familyName",
+    "email": "schema:email",
+    "phone": "schema:telephone",
+    "dateOfBirth": {
+      "@id": "schema:birthDate",
+      "@type": "schema:Date"
+    }
+  }
+}
