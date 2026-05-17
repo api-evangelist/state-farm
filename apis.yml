@@ -91,9 +91,9 @@ common:
     url: https://www.linkedin.com/company/state-farm
   - type: Twitter
     url: https://twitter.com/StateFarm
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.statefarm.com/customer-care/privacy-security/privacy/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.statefarm.com/customer-care/legal-disclaimer
   - type: FAQ
     url: https://developer.statefarm.com/faq
