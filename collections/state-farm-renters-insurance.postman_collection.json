@@ -1,0 +1,979 @@
+{
+  "item": [
+    {
+      "id": "e7948399-bd06-40e6-bd51-51dbf82b159e",
+      "name": "Quotes",
+      "description": {
+        "content": "Renters insurance quote operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "25aad4c1-5976-45b2-a2cd-39b732c74fb5",
+          "name": "Create Renters Insurance Quote",
+          "request": {
+            "name": "Create Renters Insurance Quote",
+            "description": {
+              "content": "Request a renters insurance quote for a prospective tenant. Provide the property address, desired coverage amounts, and tenant information to receive a State Farm renters insurance quote with premium details and coverage options.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"propertyAddress\": {\n    \"street\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipCode\": \"<string>\"\n  },\n  \"tenantInfo\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"dateOfBirth\": \"<date>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"coverageOptions\": {\n    \"personalPropertyLimit\": \"<integer>\",\n    \"liabilityLimit\": \"<integer>\",\n    \"medicalPaymentsLimit\": \"<integer>\",\n    \"deductible\": \"<integer>\",\n    \"additionalLivingExpenses\": \"<boolean>\",\n    \"identityRestorationCoverage\": \"<boolean>\"\n  },\n  \"effectiveDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc0df869-86c7-4ad3-a251-1818734d682c",
+              "name": "Quote successfully created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"tenantInfo\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Smith\",\n    \"dateOfBirth\": \"1990-03-15\",\n    \"email\": \"jane.smith@email.com\",\n    \"phone\": \"555-867-5309\"\n  },\n  \"coverageOptions\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"effectiveDate\": \"2026-06-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"status\": \"READY\",\n  \"annualPremium\": 186,\n  \"monthlyPremium\": 15.5,\n  \"coverageSummary\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"validUntil\": \"2026-05-16T23:59:59Z\",\n  \"quoteNumber\": \"2026-Q-987654\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cda5edf5-66b8-4143-bcda-a07d0eaef1ec",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"tenantInfo\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Smith\",\n    \"dateOfBirth\": \"1990-03-15\",\n    \"email\": \"jane.smith@email.com\",\n    \"phone\": \"555-867-5309\"\n  },\n  \"coverageOptions\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"effectiveDate\": \"2026-06-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb5ff757-7eb2-4c98-b5a2-f20c1091d720",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"tenantInfo\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Smith\",\n    \"dateOfBirth\": \"1990-03-15\",\n    \"email\": \"jane.smith@email.com\",\n    \"phone\": \"555-867-5309\"\n  },\n  \"coverageOptions\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"effectiveDate\": \"2026-06-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82b22168-1b62-4064-abd1-6dfd9376db60",
+              "name": "Quote cannot be issued for this location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"tenantInfo\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Smith\",\n    \"dateOfBirth\": \"1990-03-15\",\n    \"email\": \"jane.smith@email.com\",\n    \"phone\": \"555-867-5309\"\n  },\n  \"coverageOptions\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"effectiveDate\": \"2026-06-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "650fceb9-1f6b-441e-8938-580c846216fd",
+          "name": "Get Renters Insurance Quote",
+          "request": {
+            "name": "Get Renters Insurance Quote",
+            "description": {
+              "content": "Retrieve details of a previously created renters insurance quote by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "quotes",
+                ":quoteId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "quoteId",
+                  "description": "(Required) Unique quote identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd97d9f9-5569-40c3-ac7d-4f4fe2d1eb1f",
+              "name": "Quote details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "quoteId",
+                      "description": "(Required) Unique quote identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"status\": \"READY\",\n  \"annualPremium\": 186,\n  \"monthlyPremium\": 15.5,\n  \"coverageSummary\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  },\n  \"validUntil\": \"2026-05-16T23:59:59Z\",\n  \"quoteNumber\": \"2026-Q-987654\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "298ac371-a8cf-4fe3-a887-713d89eb785e",
+              "name": "Quote not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "quotes",
+                    ":quoteId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "quoteId",
+                      "description": "(Required) Unique quote identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c4c7d66b-9330-4c6d-9aad-e91ba584bb4c",
+      "name": "Policies",
+      "description": {
+        "content": "Renters insurance policy operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "614c8aef-a1c9-466a-9dfc-88668134b26e",
+          "name": "Bind Renters Insurance Policy",
+          "request": {
+            "name": "Bind Renters Insurance Policy",
+            "description": {
+              "content": "Convert an accepted renters insurance quote into a bound policy. This initiates the policy issuance process with State Farm. Requires a valid quote ID and confirmed payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quoteId\": \"<string>\",\n  \"paymentMethod\": \"<string>\",\n  \"paymentFrequency\": \"<string>\",\n  \"effectiveDate\": \"<date>\",\n  \"additionalInterests\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": {\n        \"street\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zipCode\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"address\": {\n        \"street\": \"<string>\",\n        \"city\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zipCode\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c892da7-6505-423b-9a66-9d0efede1a24",
+              "name": "Policy successfully bound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"paymentMethod\": \"BANK_DRAFT\",\n  \"paymentFrequency\": \"MONTHLY\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"additionalInterests\": [\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    },\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"policyNumber\": \"987-6543-B12\",\n  \"status\": \"ACTIVE\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"expirationDate\": \"2027-06-01\",\n  \"annualPremium\": 186,\n  \"monthlyPremium\": 15.5,\n  \"coverageSummary\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"insuredName\": \"Jane Smith\",\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e71ecb7-b239-4740-837b-0c71ebe7202c",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"paymentMethod\": \"BANK_DRAFT\",\n  \"paymentFrequency\": \"MONTHLY\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"additionalInterests\": [\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    },\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c918a1f2-3183-452f-b034-c326517a5ad1",
+              "name": "Quote not found or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"paymentMethod\": \"BANK_DRAFT\",\n  \"paymentFrequency\": \"MONTHLY\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"additionalInterests\": [\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    },\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33f548f6-8f5f-4de2-9a81-6989f56de7b8",
+              "name": "Quote already bound or expired",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"quoteId\": \"QT-2026-789456\",\n  \"paymentMethod\": \"BANK_DRAFT\",\n  \"paymentFrequency\": \"MONTHLY\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"additionalInterests\": [\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    },\n    {\n      \"type\": \"LANDLORD\",\n      \"name\": \"Acme Property Management LLC\",\n      \"address\": {\n        \"street\": \"123 Main St, Apt 4B\",\n        \"city\": \"Chicago\",\n        \"state\": \"IL\",\n        \"zipCode\": \"60601\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc4a2672-7e37-46ae-b4f7-1e909da84011",
+          "name": "Get Renters Insurance Policy",
+          "request": {
+            "name": "Get Renters Insurance Policy",
+            "description": {
+              "content": "Retrieve the status and details of a renters insurance policy by policy number. Returns current coverage, premium, effective dates, and policyholder information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "policies",
+                ":policyNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyNumber",
+                  "description": "(Required) State Farm policy number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ca1cba6-b082-4058-9e1a-1ddfe5538a16",
+              "name": "Policy details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies",
+                    ":policyNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyNumber",
+                      "description": "(Required) State Farm policy number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"policyNumber\": \"987-6543-B12\",\n  \"status\": \"ACTIVE\",\n  \"effectiveDate\": \"2026-06-01\",\n  \"expirationDate\": \"2027-06-01\",\n  \"annualPremium\": 186,\n  \"monthlyPremium\": 15.5,\n  \"coverageSummary\": {\n    \"personalPropertyLimit\": 25000,\n    \"liabilityLimit\": 100000,\n    \"medicalPaymentsLimit\": 1000,\n    \"deductible\": 1000,\n    \"additionalLivingExpenses\": true,\n    \"identityRestorationCoverage\": false\n  },\n  \"insuredName\": \"Jane Smith\",\n  \"propertyAddress\": {\n    \"street\": \"123 Main St, Apt 4B\",\n    \"city\": \"Chicago\",\n    \"state\": \"IL\",\n    \"zipCode\": \"60601\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a41bf79d-bc27-4cd7-aa74-287afcdb7407",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "policies",
+                    ":policyNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyNumber",
+                      "description": "(Required) State Farm policy number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"INVALID_STATE\",\n  \"message\": \"Renters insurance is not available in the requested state.\",\n  \"details\": [\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"field\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7194a92b-3be8-485a-8555-0a97c11fdc38",
+      "name": "Coverage",
+      "description": {
+        "content": "Coverage options and details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c283be1-7f55-4e3b-a789-34e84fd15f73",
+          "name": "List Coverage Options",
+          "request": {
+            "name": "List Coverage Options",
+            "description": {
+              "content": "Retrieve available renters insurance coverage options and limits available through State Farm, including personal property coverage amounts, liability limits, deductible options, and optional add-on coverages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "coverage-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter US state code to get state-specific coverage options"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9bc60b9-4a8a-446c-8c78-226264ce5403",
+              "name": "Available coverage options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "coverage-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "IL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"personalPropertyLimits\": [\n    15000,\n    25000,\n    50000,\n    75000,\n    100000\n  ],\n  \"liabilityLimits\": [\n    100000,\n    300000,\n    500000\n  ],\n  \"deductibleOptions\": [\n    500,\n    1000,\n    2000\n  ],\n  \"optionalCoverages\": [\n    {\n      \"code\": \"IDENTITY_RESTORATION\",\n      \"name\": \"Identity Restoration Coverage\",\n      \"description\": \"Coverage for identity theft restoration expenses\"\n    },\n    {\n      \"code\": \"IDENTITY_RESTORATION\",\n      \"name\": \"Identity Restoration Coverage\",\n      \"description\": \"Coverage for identity theft restoration expenses\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statefarm.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "renters:quote renters:policy:read renters:policy:write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.statefarm.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0b0dfd00-a3ad-480e-b401-fa7f8eb95ccd",
+    "name": "State Farm Renters Insurance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.\n\nContact Support:\n Name: State Farm Partner Gateway",
+      "type": "text/plain"
+    }
+  }
+}

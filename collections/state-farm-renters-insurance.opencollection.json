@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "State Farm Renters Insurance API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.statefarm.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quotes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Renters Insurance Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.statefarm.com/v1/renters/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a renters insurance quote for a prospective tenant. Provide the property address, desired coverage amounts, and tenant information to receive a State Farm renters insurance quote with premium details and coverage options."
+        },
+        {
+          "info": {
+            "name": "Get Renters Insurance Quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statefarm.com/v1/renters/quotes/:quoteId",
+            "params": [
+              {
+                "name": "quoteId",
+                "value": "",
+                "type": "path",
+                "description": "Unique quote identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a previously created renters insurance quote by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bind Renters Insurance Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.statefarm.com/v1/renters/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert an accepted renters insurance quote into a bound policy. This initiates the policy issuance process with State Farm. Requires a valid quote ID and confirmed payment method."
+        },
+        {
+          "info": {
+            "name": "Get Renters Insurance Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statefarm.com/v1/renters/policies/:policyNumber",
+            "params": [
+              {
+                "name": "policyNumber",
+                "value": "",
+                "type": "path",
+                "description": "State Farm policy number"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and details of a renters insurance policy by policy number. Returns current coverage, premium, effective dates, and policyholder information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Coverage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Coverage Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statefarm.com/v1/renters/coverage-options",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state code to get state-specific coverage options"
+              }
+            ]
+          },
+          "docs": "Retrieve available renters insurance coverage options and limits available through State Farm, including personal property coverage amounts, liability limits, deductible options, and optional add-on coverages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
