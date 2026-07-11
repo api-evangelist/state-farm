@@ -75,6 +75,10 @@ apis:
   - type: Documentation
     url: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
 common:
+- type: Authentication
+  url: authentication/state-farm-authentication.yml
+- type: OAuthScopes
+  url: scopes/state-farm-scopes.yml
 - type: Website
   url: https://www.statefarm.com
 - type: DeveloperPortal

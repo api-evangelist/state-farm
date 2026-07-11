@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/state-farm-renters-insurance-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/state-farm-renters-insurance-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.statefarm.com/oauth/token
+scopes:
+- scope: renters:policy:read
+  description: Read renters insurance policy details
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/state-farm-renters-insurance-openapi.yml
+- scope: renters:policy:write
+  description: Bind and manage renters insurance policies
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/state-farm-renters-insurance-openapi.yml
+- scope: renters:quote
+  description: Create and retrieve renters insurance quotes
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/state-farm-renters-insurance-openapi.yml
