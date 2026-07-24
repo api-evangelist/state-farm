@@ -1,0 +1,261 @@
+openapi: 3.0.3
+info:
+  title: State Farm Renters Insurance Coverage Quotes API
+  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.
+  version: 1.0.0
+  contact:
+    name: State Farm Partner Gateway
+    url: https://developer.statefarm.com
+  termsOfService: https://www.statefarm.com/customer-care/legal-disclaimer
+  license:
+    name: Proprietary
+    url: https://developer.statefarm.com/faq
+servers:
+- url: https://api.statefarm.com/v1
+  description: State Farm API Production
+security:
+- OAuth2:
+  - renters:quote
+  - renters:policy:read
+  - renters:policy:write
+tags:
+- name: Quotes
+  description: Renters insurance quote operations
+paths:
+  /renters/quotes:
+    post:
+      operationId: createRentersQuote
+      summary: Create Renters Insurance Quote
+      description: Request a renters insurance quote for a prospective tenant. Provide the property address, desired coverage amounts, and tenant information to receive a State Farm renters insurance quote with premium details and coverage options.
+      tags:
+      - Quotes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteRequest'
+      responses:
+        '201':
+          description: Quote successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Quote cannot be issued for this location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /renters/quotes/{quoteId}:
+    get:
+      operationId: getRentersQuote
+      summary: Get Renters Insurance Quote
+      description: Retrieve details of a previously created renters insurance quote by its ID.
+      tags:
+      - Quotes
+      parameters:
+      - name: quoteId
+        in: path
+        description: Unique quote identifier
+        required: true
+        schema:
+          type: string
+          example: QT-2026-789456
+      responses:
+        '200':
+          description: Quote details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+        '404':
+          description: Quote not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CoverageSelection:
+      type: object
+      description: Renters insurance coverage selections
+      properties:
+        personalPropertyLimit:
+          type: integer
+          description: Personal property coverage limit in USD
+          example: 25000
+        liabilityLimit:
+          type: integer
+          description: Personal liability coverage limit in USD
+          example: 100000
+        medicalPaymentsLimit:
+          type: integer
+          description: Medical payments to others limit in USD
+          example: 1000
+        deductible:
+          type: integer
+          description: Policy deductible amount in USD
+          example: 1000
+        additionalLivingExpenses:
+          type: boolean
+          description: Whether additional living expenses coverage is included
+          example: true
+        identityRestorationCoverage:
+          type: boolean
+          description: Whether identity restoration coverage is included
+          example: false
+    QuoteRequest:
+      type: object
+      required:
+      - propertyAddress
+      - tenantInfo
+      - coverageOptions
+      description: Request body for creating a renters insurance quote
+      properties:
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        tenantInfo:
+          $ref: '#/components/schemas/TenantInfo'
+        coverageOptions:
+          $ref: '#/components/schemas/CoverageSelection'
+        effectiveDate:
+          type: string
+          format: date
+          description: Desired policy effective date
+          example: '2026-06-01'
+    Address:
+      type: object
+      required:
+      - street
+      - city
+      - state
+      - zipCode
+      description: US property address
+      properties:
+        street:
+          type: string
+          description: Street address including unit number
+          example: 123 Main St, Apt 4B
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        state:
+          type: string
+          description: Two-letter US state code
+          example: IL
+        zipCode:
+          type: string
+          description: ZIP or ZIP+4 postal code
+          example: '60601'
+    QuoteResponse:
+      type: object
+      description: Renters insurance quote details
+      properties:
+        quoteId:
+          type: string
+          description: Unique quote identifier
+          example: QT-2026-789456
+        status:
+          type: string
+          description: Quote status
+          enum:
+          - PENDING
+          - READY
+          - ACCEPTED
+          - EXPIRED
+          - DECLINED
+          example: READY
+        annualPremium:
+          type: number
+          format: double
+          description: Annual premium amount in USD
+          example: 186.0
+        monthlyPremium:
+          type: number
+          format: double
+          description: Monthly premium amount in USD
+          example: 15.5
+        coverageSummary:
+          $ref: '#/components/schemas/CoverageSelection'
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        validUntil:
+          type: string
+          format: date-time
+          description: Date and time the quote expires
+          example: '2026-05-16T23:59:59Z'
+        quoteNumber:
+          type: string
+          description: Human-readable quote number for reference
+          example: 2026-Q-987654
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    TenantInfo:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      description: Tenant/applicant personal information
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Smith
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1990-03-15'
+        email:
+          type: string
+          format: email
+          example: jane.smith@email.com
+        phone:
+          type: string
+          example: 555-867-5309
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.statefarm.com/oauth/token
+          scopes:
+            renters:quote: Create and retrieve renters insurance quotes
+            renters:policy:read: Read renters insurance policy details
+            renters:policy:write: Bind and manage renters insurance policies
