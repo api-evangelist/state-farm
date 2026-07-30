@@ -1,4 +1,18 @@
 aid: state-farm
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/state-farm.png
 url: https://raw.githubusercontent.com/api-evangelist/state-farm/refs/heads/main/apis.yml
 modified: '2026-05-19'
 name: State Farm
@@ -13,38 +27,14 @@ description: State Farm is the largest property and casualty insurance provider 
   with State Farm's insurance products and services. State Farm is a mutual company
   owned by its policyholders, consistently ranked among the Fortune 50.
 apis:
-- aid: state-farm:renters-insurance-api
-  name: Renters Insurance API
-  description: The State Farm Renters Insurance API enables partner platforms, real
-    estate applications, and property management systems to offer embedded renters
-    insurance quotes and policies to tenants. Partners can request quotes, initiate
-    policy applications, and retrieve policy status using this API. State Farm is
-    the industry leader in renters insurance, providing coverage for personal belongings,
-    liability protection, and additional living expenses. Available in all US states
-    except California, Massachusetts, and Rhode Island.
-  humanURL: https://developer.statefarm.com/api/renters
-  baseURL: https://api.statefarm.com/v1
-  tags:
-  - Insurance
-  - Renters Insurance
-  - Property
-  - Embedded Insurance
-  - Partner
-  properties:
-  - type: Documentation
-    url: https://developer.statefarm.com/api/renters
-  - type: OpenAPI
-    url: openapi/state-farm-renters-insurance-openapi.yml
-  - url: graphql/state-farm-graphql.md
-    type: GraphQL
 - aid: state-farm:auto-insurance-api
   name: Auto Insurance API
-  description: The State Farm Auto Insurance API supports partner integrations for
-    automobile insurance quoting, policy management, and claims inquiry. This API
-    enables auto dealers, telematics platforms, and financial institutions to embed
-    State Farm auto insurance products within their own applications. State Farm is
-    the largest auto insurer in the US. The API supports retrieving quotes, checking
-    policy status, and accessing coverage information.
+  description: >-
+    The State Farm Auto Insurance API supports partner integrations for automobile insurance quoting,
+    policy management, and claims inquiry. This API enables auto dealers, telematics platforms, and financial
+    institutions to embed State Farm auto insurance products within their own applications. State Farm
+    is the largest auto insurer in the US. The API supports retrieving quotes, checking policy status,
+    and accessing coverage information.
   humanURL: https://developer.statefarm.com/
   baseURL: https://api.statefarm.com/v1
   tags:
@@ -58,11 +48,11 @@ apis:
     url: https://developer.statefarm.com/
 - aid: state-farm:b2b-insurance-inquiry-api
   name: B2B Insurance Inquiry API
-  description: The State Farm B2B Insurance Inquiry API is designed for lenders, mortgage
-    servicers, and financial institutions that need to verify homeowner and auto insurance
-    policy status for collateral protection purposes. This API supports home and auto
-    lenders in verifying that borrowers maintain the required insurance coverage on
-    financed assets. Accessible through the State Farm B2B portal.
+  description: >-
+    The State Farm B2B Insurance Inquiry API is designed for lenders, mortgage servicers, and financial
+    institutions that need to verify homeowner and auto insurance policy status for collateral protection
+    purposes. This API supports home and auto lenders in verifying that borrowers maintain the required
+    insurance coverage on financed assets. Accessible through the State Farm B2B portal.
   humanURL: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
   baseURL: https://b2b.statefarm.com/api/v1
   tags:
@@ -74,6 +64,48 @@ apis:
   properties:
   - type: Documentation
     url: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
+- aid: state-farm:state-farm-coverage-api
+  name: State Farm Coverage API
+  description: Coverage options and details
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-coverage-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
+  - type: GraphQL
+    url: graphql/state-farm-graphql.md
+- aid: state-farm:state-farm-policies-api
+  name: State Farm Policies API
+  description: Renters insurance policy operations
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-policies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
+  - type: GraphQL
+    url: graphql/state-farm-graphql.md
+- aid: state-farm:state-farm-quotes-api
+  name: State Farm Quotes API
+  description: Renters insurance quote operations
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
+  - type: GraphQL
+    url: graphql/state-farm-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/state-farm-agentic-access.yml
