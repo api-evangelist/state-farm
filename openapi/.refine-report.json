@@ -1,0 +1,18 @@
+{
+  "provider": "state-farm",
+  "sources": [
+    "state-farm-coverage-api-openapi.yml",
+    "state-farm-policies-api-openapi.yml",
+    "state-farm-quotes-api-openapi.yml"
+  ],
+  "outputs": [
+    "state-farm-coverage-api-openapi.yml",
+    "state-farm-policies-api-openapi.yml",
+    "state-farm-quotes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
