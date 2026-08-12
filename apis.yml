@@ -138,7 +138,7 @@ common:
 - type: FAQ
   url: https://developer.statefarm.com/faq
 - type: OpenAPI
-  url: openapi/state-farm-renters-insurance-openapi.yml
+  url: openapi/_original/state-farm-renters-insurance-openapi.yml
 - type: JSONSchema
   url: json-schema/state-farm-renters-policy-schema.json
 - type: JSONStructure
