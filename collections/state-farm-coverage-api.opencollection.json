@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "State Farm Renters Insurance Coverage API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.statefarm.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coverage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Coverage Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.statefarm.com/v1/renters/coverage-options",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Two-letter US state code to get state-specific coverage options"
+              }
+            ]
+          },
+          "docs": "Retrieve available renters insurance coverage options and limits available through State Farm, including personal property coverage amounts, liability limits, deductible options, and optional add-on coverages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,141 @@
+{
+  "item": [
+    {
+      "id": "338680c4-db6f-4ad9-8abd-2a663b36d5d9",
+      "name": "Coverage",
+      "description": {
+        "content": "Coverage options and details",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ceaeda87-1b0e-495e-a3e6-fd60065754bf",
+          "name": "List Coverage Options",
+          "request": {
+            "name": "List Coverage Options",
+            "description": {
+              "content": "Retrieve available renters insurance coverage options and limits available through State Farm, including personal property coverage amounts, liability limits, deductible options, and optional add-on coverages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "renters",
+                "coverage-options"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Two-letter US state code to get state-specific coverage options"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "617f4642-216a-4e78-806e-10538d70d8e7",
+              "name": "Available coverage options",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "renters",
+                    "coverage-options"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "IL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"personalPropertyLimits\": [\n    15000,\n    25000,\n    50000,\n    75000,\n    100000\n  ],\n  \"liabilityLimits\": [\n    100000,\n    300000,\n    500000\n  ],\n  \"deductibleOptions\": [\n    500,\n    1000,\n    2000\n  ],\n  \"optionalCoverages\": [\n    {\n      \"code\": \"IDENTITY_RESTORATION\",\n      \"name\": \"Identity Restoration Coverage\",\n      \"description\": \"Coverage for identity theft restoration expenses\"\n    },\n    {\n      \"code\": \"IDENTITY_RESTORATION\",\n      \"name\": \"Identity Restoration Coverage\",\n      \"description\": \"Coverage for identity theft restoration expenses\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.statefarm.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "renters:quote renters:policy:read renters:policy:write"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.statefarm.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e85f380-b61b-4ac8-b72a-6f2f7fc230b9",
+    "name": "State Farm Renters Insurance Coverage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.\n\nContact Support:\n Name: State Farm Partner Gateway",
+      "type": "text/plain"
+    }
+  }
+}
