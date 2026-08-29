@@ -1,0 +1,42 @@
+slug: state-farm
+provider: State Farm
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Policies
+  spec_file: state-farm-policies-api-openapi.yml
+  capability_id: BC-2140.10
+  capability_id_l1: BC-2140
+  capability_name: Policy Issuance Management
+  confidence: 0.8
+  evidence: POST /renters/policies  createRentersPolicy  Bind Renters Insurance Policy; GET /renters/policies/{policyNumber}
+  reason: Policy binding and policy status retrieval with PolicyBindRequest schema is insurance policy
+    issuance/administration.
+- tag: Quotes
+  spec_file: state-farm-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.8
+  evidence: POST /renters/quotes  createRentersQuote  Create Renters Insurance Quote; QuoteRequest, QuoteResponse
+  reason: Quote generation and retrieval for partner/aggregator channels corresponds to quote and submission
+    management feeding bind conversion.
+- tag: Coverage
+  spec_file: state-farm-coverage-api-openapi.yml
+  capability_id: BC-2100.10
+  capability_id_l1: BC-2100
+  capability_name: Insurance Product Catalogue Management
+  confidence: 0.72
+  evidence: GET /renters/coverage-options  listCoverageOptions  List Coverage Options
+  reason: Lists available renters insurance coverage options/limits — a read of the insurance product
+    and coverage catalogue.

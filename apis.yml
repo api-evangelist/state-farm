@@ -120,6 +120,9 @@ apis:
   - type: GraphQL
     url: graphql/state-farm-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/state-farm-capability-edges.yml
+  name: State Farm Business Capability Map
 - type: AgenticAccess
   url: agentic-access/state-farm-agentic-access.yml
 - type: VulnerabilityDisclosure
