@@ -29,25 +29,11 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/state-farm
 url: https://raw.githubusercontent.com/api-evangelist/state-farm/refs/heads/main/apis.yml
 modified: '2026-05-19'
 name: State Farm
-description: State Farm is the largest property and casualty insurance provider in
-  the United States, headquartered in Bloomington, Illinois. Founded in 1922, the
-  company offers a comprehensive range of insurance products including auto, home,
-  renters, life, health, business, and farm/ranch insurance, as well as banking and
-  financial services. State Farm operates through a network of approximately 19,000
-  agents across the US and Canada. The company has invested heavily in its digital
-  transformation, operating a Partner Gateway developer portal at developer.statefarm.com
-  that exposes APIs enabling partners, agents, and third-party platforms to integrate
-  with State Farm's insurance products and services. State Farm is a mutual company
-  owned by its policyholders, consistently ranked among the Fortune 50.
+description: State Farm is the largest property and casualty insurance provider in the United States, headquartered in Bloomington, Illinois. Founded in 1922, the company offers a comprehensive range of insurance products including auto, home, renters, life, health, business, and farm/ranch insurance, as well as banking and financial services. State Farm operates through a network of approximately 19,000 agents across the US and Canada. The company has invested heavily in its digital transformation, operating a Partner Gateway developer portal at developer.statefarm.com that exposes APIs enabling partners, agents, and third-party platforms to integrate with State Farm's insurance products and services. State Farm is a mutual company owned by its policyholders, consistently ranked among the Fortune 50.
 apis:
 - aid: state-farm:auto-insurance-api
   name: Auto Insurance API
-  description: >-
-    The State Farm Auto Insurance API supports partner integrations for automobile insurance quoting,
-    policy management, and claims inquiry. This API enables auto dealers, telematics platforms, and financial
-    institutions to embed State Farm auto insurance products within their own applications. State Farm
-    is the largest auto insurer in the US. The API supports retrieving quotes, checking policy status,
-    and accessing coverage information.
+  description: The State Farm Auto Insurance API supports partner integrations for automobile insurance quoting, policy management, and claims inquiry. This API enables auto dealers, telematics platforms, and financial institutions to embed State Farm auto insurance products within their own applications. State Farm is the largest auto insurer in the US. The API supports retrieving quotes, checking policy status, and accessing coverage information.
   humanURL: https://developer.statefarm.com/
   baseURL: https://api.statefarm.com/v1
   tags:
@@ -61,11 +47,7 @@ apis:
     url: https://developer.statefarm.com/
 - aid: state-farm:b2b-insurance-inquiry-api
   name: B2B Insurance Inquiry API
-  description: >-
-    The State Farm B2B Insurance Inquiry API is designed for lenders, mortgage servicers, and financial
-    institutions that need to verify homeowner and auto insurance policy status for collateral protection
-    purposes. This API supports home and auto lenders in verifying that borrowers maintain the required
-    insurance coverage on financed assets. Accessible through the State Farm B2B portal.
+  description: The State Farm B2B Insurance Inquiry API is designed for lenders, mortgage servicers, and financial institutions that need to verify homeowner and auto insurance policy status for collateral protection purposes. This API supports home and auto lenders in verifying that borrowers maintain the required insurance coverage on financed assets. Accessible through the State Farm B2B portal.
   humanURL: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
   baseURL: https://b2b.statefarm.com/api/v1
   tags:
@@ -119,6 +101,62 @@ apis:
     url: https://developer.statefarm.com/api/renters
   - type: GraphQL
     url: graphql/state-farm-graphql.md
+- aid: state-farm:homeowners-insurance-api
+  name: Homeowners Insurance API
+  description: The State Farm Homeowners Insurance API enables mortgage lenders, real estate platforms, and partner networks to offer homeowners insurance quoting and policy integration. Supports closing day insurance coordination, escrow verification, and coverage inquiry for lenders requiring collateral protection evidence. State Farm is one of the largest homeowners insurance providers in the US.
+  humanURL: https://developer.statefarm.com/
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Insurance
+  - Homeowners Insurance
+  - Mortgage
+  - Real-Estate
+  - Partner
+  tags_raw:
+  - Insurance
+  - Homeowners Insurance
+  - Mortgage
+  - Real Estate
+  - Partner
+  properties:
+  - type: Documentation
+    url: https://developer.statefarm.com/
+- aid: state-farm:state-farm-insurance-coverage-api
+  name: State Farm Insurance Coverage API
+  description: Coverage options and details
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Coverage
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-insurance-coverage-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
+- aid: state-farm:state-farm-insurance-policies-api
+  name: State Farm Insurance Policies API
+  description: Renters insurance policy operations
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-insurance-policies-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
+- aid: state-farm:state-farm-insurance-quotes-api
+  name: State Farm Insurance Quotes API
+  description: Renters insurance quote operations
+  humanURL: https://developer.statefarm.com/api/renters
+  baseURL: https://api.statefarm.com/v1
+  tags:
+  - Quotes
+  properties:
+  - type: OpenAPI
+    url: openapi/state-farm-insurance-quotes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.statefarm.com/api/renters
 common:
 - type: CapabilityMap
   url: capabilities/state-farm-capability-edges.yml
