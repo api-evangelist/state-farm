@@ -52,6 +52,12 @@ apis:
   - Insurance
   - Auto Insurance
   - Vehicles
+  - Partners
+  - Embedded Insurance
+  tags_raw:
+  - Insurance
+  - Auto Insurance
+  - Vehicles
   - Partner
   - Embedded Insurance
   properties:
@@ -131,7 +137,7 @@ apis:
   - Homeowners Insurance
   - Mortgage
   - Real-Estate
-  - Partner
+  - Partners
   tags_raw:
   - Insurance
   - Homeowners Insurance
