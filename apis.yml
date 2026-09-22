@@ -147,6 +147,24 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.statefarm.com/
+- aid: state-farm:b2b-lender-services-api
+  name: B2B Lender Services API
+  description: The State Farm B2B Lender Services API provides mortgage lenders and auto lenders with
+    programmatic access to verify insurance coverage for collateral assets financed by their borrowers.
+    Lenders can confirm active homeowners, auto, or property insurance policies written by any State Farm
+    Insurance Companies subsidiary. This supports lender compliance, reduces force-placed insurance, and
+    streamlines closing workflows.
+  humanURL: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
+  baseURL: https://b2b.statefarm.com/api/v1
+  tags:
+  - Insurance
+  - B2B
+  - Lenders
+  - Mortgage
+  - Verification
+  properties:
+  - type: Documentation
+    url: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
 common:
 - type: CapabilityMap
   url: capabilities/state-farm-capability-edges.yml
