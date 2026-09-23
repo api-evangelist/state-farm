@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: State Farm Renters Insurance Coverage Quotes API
-  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.
+  title: State Farm Renters Insurance Quotes API
+  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows.
   version: 1.0.0
   contact:
     name: State Farm Partner Gateway
@@ -90,53 +90,52 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    CoverageSelection:
-      type: object
-      description: Renters insurance coverage selections
-      properties:
-        personalPropertyLimit:
-          type: integer
-          description: Personal property coverage limit in USD
-          example: 25000
-        liabilityLimit:
-          type: integer
-          description: Personal liability coverage limit in USD
-          example: 100000
-        medicalPaymentsLimit:
-          type: integer
-          description: Medical payments to others limit in USD
-          example: 1000
-        deductible:
-          type: integer
-          description: Policy deductible amount in USD
-          example: 1000
-        additionalLivingExpenses:
-          type: boolean
-          description: Whether additional living expenses coverage is included
-          example: true
-        identityRestorationCoverage:
-          type: boolean
-          description: Whether identity restoration coverage is included
-          example: false
-    QuoteRequest:
+    TenantInfo:
       type: object
       required:
-      - propertyAddress
-      - tenantInfo
-      - coverageOptions
-      description: Request body for creating a renters insurance quote
+      - firstName
+      - lastName
+      - dateOfBirth
+      description: Tenant/applicant personal information
       properties:
-        propertyAddress:
-          $ref: '#/components/schemas/Address'
-        tenantInfo:
-          $ref: '#/components/schemas/TenantInfo'
-        coverageOptions:
-          $ref: '#/components/schemas/CoverageSelection'
-        effectiveDate:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Smith
+        dateOfBirth:
           type: string
           format: date
-          description: Desired policy effective date
-          example: '2026-06-01'
+          example: '1990-03-15'
+        email:
+          type: string
+          format: email
+          example: jane.smith@email.com
+        phone:
+          type: string
+          example: 555-867-5309
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     Address:
       type: object
       required:
@@ -203,52 +202,53 @@ components:
           type: string
           description: Human-readable quote number for reference
           example: 2026-Q-987654
-    Error:
+    CoverageSelection:
       type: object
-      description: Error response
+      description: Renters insurance coverage selections
       properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    TenantInfo:
+        personalPropertyLimit:
+          type: integer
+          description: Personal property coverage limit in USD
+          example: 25000
+        liabilityLimit:
+          type: integer
+          description: Personal liability coverage limit in USD
+          example: 100000
+        medicalPaymentsLimit:
+          type: integer
+          description: Medical payments to others limit in USD
+          example: 1000
+        deductible:
+          type: integer
+          description: Policy deductible amount in USD
+          example: 1000
+        additionalLivingExpenses:
+          type: boolean
+          description: Whether additional living expenses coverage is included
+          example: true
+        identityRestorationCoverage:
+          type: boolean
+          description: Whether identity restoration coverage is included
+          example: false
+    QuoteRequest:
       type: object
       required:
-      - firstName
-      - lastName
-      - dateOfBirth
-      description: Tenant/applicant personal information
+      - propertyAddress
+      - tenantInfo
+      - coverageOptions
+      description: Request body for creating a renters insurance quote
       properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Smith
-        dateOfBirth:
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        tenantInfo:
+          $ref: '#/components/schemas/TenantInfo'
+        coverageOptions:
+          $ref: '#/components/schemas/CoverageSelection'
+        effectiveDate:
           type: string
           format: date
-          example: '1990-03-15'
-        email:
-          type: string
-          format: email
-          example: jane.smith@email.com
-        phone:
-          type: string
-          example: 555-867-5309
+          description: Desired policy effective date
+          example: '2026-06-01'
   securitySchemes:
     OAuth2:
       type: oauth2

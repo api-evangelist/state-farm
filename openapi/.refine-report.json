@@ -1,9 +1,7 @@
 {
   "provider": "state-farm",
   "sources": [
-    "state-farm-coverage-api-openapi.yml",
-    "state-farm-policies-api-openapi.yml",
-    "state-farm-quotes-api-openapi.yml"
+    "_original/state-farm-renters-insurance-openapi.yml"
   ],
   "outputs": [
     "state-farm-coverage-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "state-farm-renters-insurance-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "state-farm-coverage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "state-farm-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "state-farm-quotes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
