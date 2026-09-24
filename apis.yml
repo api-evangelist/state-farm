@@ -93,8 +93,6 @@ apis:
     url: openapi/state-farm-coverage-api-openapi.yml
   - type: Documentation
     url: https://developer.statefarm.com/api/renters
-  - type: GraphQL
-    url: graphql/state-farm-graphql.md
 - aid: state-farm:state-farm-policies-api
   name: State Farm Policies API
   description: Renters insurance policy operations
@@ -107,8 +105,6 @@ apis:
     url: openapi/state-farm-policies-api-openapi.yml
   - type: Documentation
     url: https://developer.statefarm.com/api/renters
-  - type: GraphQL
-    url: graphql/state-farm-graphql.md
 - aid: state-farm:state-farm-quotes-api
   name: State Farm Quotes API
   description: Renters insurance quote operations
@@ -121,8 +117,6 @@ apis:
     url: openapi/state-farm-quotes-api-openapi.yml
   - type: Documentation
     url: https://developer.statefarm.com/api/renters
-  - type: GraphQL
-    url: graphql/state-farm-graphql.md
 - aid: state-farm:homeowners-insurance-api
   name: Homeowners Insurance API
   description: >-
@@ -136,7 +130,7 @@ apis:
   - Insurance
   - Homeowners Insurance
   - Mortgage
-  - Real-Estate
+  - Real Estate
   - Partners
   tags_raw:
   - Insurance
@@ -144,6 +138,7 @@ apis:
   - Mortgage
   - Real Estate
   - Partner
+  - Real-Estate
   properties:
   - type: Documentation
     url: https://developer.statefarm.com/
