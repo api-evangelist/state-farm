@@ -90,52 +90,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    TenantInfo:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - dateOfBirth
-      description: Tenant/applicant personal information
-      properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Smith
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1990-03-15'
-        email:
-          type: string
-          format: email
-          example: jane.smith@email.com
-        phone:
-          type: string
-          example: 555-867-5309
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     Address:
       type: object
       required:
@@ -202,6 +156,71 @@ components:
           type: string
           description: Human-readable quote number for reference
           example: 2026-Q-987654
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    TenantInfo:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      description: Tenant/applicant personal information
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Smith
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1990-03-15'
+        email:
+          type: string
+          format: email
+          example: jane.smith@email.com
+        phone:
+          type: string
+          example: 555-867-5309
+    QuoteRequest:
+      type: object
+      required:
+      - propertyAddress
+      - tenantInfo
+      - coverageOptions
+      description: Request body for creating a renters insurance quote
+      properties:
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        tenantInfo:
+          $ref: '#/components/schemas/TenantInfo'
+        coverageOptions:
+          $ref: '#/components/schemas/CoverageSelection'
+        effectiveDate:
+          type: string
+          format: date
+          description: Desired policy effective date
+          example: '2026-06-01'
     CoverageSelection:
       type: object
       description: Renters insurance coverage selections
@@ -230,25 +249,6 @@ components:
           type: boolean
           description: Whether identity restoration coverage is included
           example: false
-    QuoteRequest:
-      type: object
-      required:
-      - propertyAddress
-      - tenantInfo
-      - coverageOptions
-      description: Request body for creating a renters insurance quote
-      properties:
-        propertyAddress:
-          $ref: '#/components/schemas/Address'
-        tenantInfo:
-          $ref: '#/components/schemas/TenantInfo'
-        coverageOptions:
-          $ref: '#/components/schemas/CoverageSelection'
-        effectiveDate:
-          type: string
-          format: date
-          description: Desired policy effective date
-          example: '2026-06-01'
   securitySchemes:
     OAuth2:
       type: oauth2

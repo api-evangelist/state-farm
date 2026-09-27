@@ -90,27 +90,43 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    PolicyBindRequest:
       type: object
-      description: Error response
+      required:
+      - quoteId
+      - paymentMethod
+      - paymentFrequency
+      description: Request to bind a renters insurance policy from a quote
       properties:
-        code:
+        quoteId:
           type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
+          description: Quote ID to bind into a policy
+          example: QT-2026-789456
+        paymentMethod:
           type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
+          description: Payment method type
+          enum:
+          - CREDIT_CARD
+          - BANK_DRAFT
+          - ELECTRONIC_CHECK
+          example: BANK_DRAFT
+        paymentFrequency:
+          type: string
+          description: How often premiums are billed
+          enum:
+          - MONTHLY
+          - ANNUALLY
+          example: MONTHLY
+        effectiveDate:
+          type: string
+          format: date
+          description: Policy effective date
+          example: '2026-06-01'
+        additionalInterests:
           type: array
+          description: Additional interest parties (e.g., landlords, lenders)
           items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+            $ref: '#/components/schemas/AdditionalInterest'
     Address:
       type: object
       required:
@@ -136,53 +152,6 @@ components:
           type: string
           description: ZIP or ZIP+4 postal code
           example: '60601'
-    AdditionalInterest:
-      type: object
-      description: Additional interest party on the policy
-      properties:
-        type:
-          type: string
-          description: Type of additional interest
-          enum:
-          - LANDLORD
-          - PROPERTY_MANAGEMENT
-          - LENDER
-          - OTHER
-          example: LANDLORD
-        name:
-          type: string
-          description: Name of the additional interest party
-          example: Acme Property Management LLC
-        address:
-          $ref: '#/components/schemas/Address'
-    CoverageSelection:
-      type: object
-      description: Renters insurance coverage selections
-      properties:
-        personalPropertyLimit:
-          type: integer
-          description: Personal property coverage limit in USD
-          example: 25000
-        liabilityLimit:
-          type: integer
-          description: Personal liability coverage limit in USD
-          example: 100000
-        medicalPaymentsLimit:
-          type: integer
-          description: Medical payments to others limit in USD
-          example: 1000
-        deductible:
-          type: integer
-          description: Policy deductible amount in USD
-          example: 1000
-        additionalLivingExpenses:
-          type: boolean
-          description: Whether additional living expenses coverage is included
-          example: true
-        identityRestorationCoverage:
-          type: boolean
-          description: Whether identity restoration coverage is included
-          example: false
     PolicyResponse:
       type: object
       description: Renters insurance policy details
@@ -229,43 +198,74 @@ components:
           example: Jane Smith
         propertyAddress:
           $ref: '#/components/schemas/Address'
-    PolicyBindRequest:
+    AdditionalInterest:
       type: object
-      required:
-      - quoteId
-      - paymentMethod
-      - paymentFrequency
-      description: Request to bind a renters insurance policy from a quote
+      description: Additional interest party on the policy
       properties:
-        quoteId:
+        type:
           type: string
-          description: Quote ID to bind into a policy
-          example: QT-2026-789456
-        paymentMethod:
-          type: string
-          description: Payment method type
+          description: Type of additional interest
           enum:
-          - CREDIT_CARD
-          - BANK_DRAFT
-          - ELECTRONIC_CHECK
-          example: BANK_DRAFT
-        paymentFrequency:
+          - LANDLORD
+          - PROPERTY_MANAGEMENT
+          - LENDER
+          - OTHER
+          example: LANDLORD
+        name:
           type: string
-          description: How often premiums are billed
-          enum:
-          - MONTHLY
-          - ANNUALLY
-          example: MONTHLY
-        effectiveDate:
+          description: Name of the additional interest party
+          example: Acme Property Management LLC
+        address:
+          $ref: '#/components/schemas/Address'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
           type: string
-          format: date
-          description: Policy effective date
-          example: '2026-06-01'
-        additionalInterests:
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
           type: array
-          description: Additional interest parties (e.g., landlords, lenders)
           items:
-            $ref: '#/components/schemas/AdditionalInterest'
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    CoverageSelection:
+      type: object
+      description: Renters insurance coverage selections
+      properties:
+        personalPropertyLimit:
+          type: integer
+          description: Personal property coverage limit in USD
+          example: 25000
+        liabilityLimit:
+          type: integer
+          description: Personal liability coverage limit in USD
+          example: 100000
+        medicalPaymentsLimit:
+          type: integer
+          description: Medical payments to others limit in USD
+          example: 1000
+        deductible:
+          type: integer
+          description: Policy deductible amount in USD
+          example: 1000
+        additionalLivingExpenses:
+          type: boolean
+          description: Whether additional living expenses coverage is included
+          example: true
+        identityRestorationCoverage:
+          type: boolean
+          description: Whether identity restoration coverage is included
+          example: false
   securitySchemes:
     OAuth2:
       type: oauth2
