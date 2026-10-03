@@ -90,6 +90,27 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     PolicyBindRequest:
       type: object
       required:
@@ -127,31 +148,6 @@ components:
           description: Additional interest parties (e.g., landlords, lenders)
           items:
             $ref: '#/components/schemas/AdditionalInterest'
-    Address:
-      type: object
-      required:
-      - street
-      - city
-      - state
-      - zipCode
-      description: US property address
-      properties:
-        street:
-          type: string
-          description: Street address including unit number
-          example: 123 Main St, Apt 4B
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        state:
-          type: string
-          description: Two-letter US state code
-          example: IL
-        zipCode:
-          type: string
-          description: ZIP or ZIP+4 postal code
-          example: '60601'
     PolicyResponse:
       type: object
       description: Renters insurance policy details
@@ -217,27 +213,31 @@ components:
           example: Acme Property Management LLC
         address:
           $ref: '#/components/schemas/Address'
-    Error:
+    Address:
       type: object
-      description: Error response
+      required:
+      - street
+      - city
+      - state
+      - zipCode
+      description: US property address
       properties:
-        code:
+        street:
           type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
+          description: Street address including unit number
+          example: 123 Main St, Apt 4B
+        city:
           type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+          description: City name
+          example: Chicago
+        state:
+          type: string
+          description: Two-letter US state code
+          example: IL
+        zipCode:
+          type: string
+          description: ZIP or ZIP+4 postal code
+          example: '60601'
     CoverageSelection:
       type: object
       description: Renters insurance coverage selections

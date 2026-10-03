@@ -90,6 +90,46 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    QuoteRequest:
+      type: object
+      required:
+      - propertyAddress
+      - tenantInfo
+      - coverageOptions
+      description: Request body for creating a renters insurance quote
+      properties:
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        tenantInfo:
+          $ref: '#/components/schemas/TenantInfo'
+        coverageOptions:
+          $ref: '#/components/schemas/CoverageSelection'
+        effectiveDate:
+          type: string
+          format: date
+          description: Desired policy effective date
+          example: '2026-06-01'
     Address:
       type: object
       required:
@@ -115,6 +155,59 @@ components:
           type: string
           description: ZIP or ZIP+4 postal code
           example: '60601'
+    TenantInfo:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      description: Tenant/applicant personal information
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Smith
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1990-03-15'
+        email:
+          type: string
+          format: email
+          example: jane.smith@email.com
+        phone:
+          type: string
+          example: 555-867-5309
+    CoverageSelection:
+      type: object
+      description: Renters insurance coverage selections
+      properties:
+        personalPropertyLimit:
+          type: integer
+          description: Personal property coverage limit in USD
+          example: 25000
+        liabilityLimit:
+          type: integer
+          description: Personal liability coverage limit in USD
+          example: 100000
+        medicalPaymentsLimit:
+          type: integer
+          description: Medical payments to others limit in USD
+          example: 1000
+        deductible:
+          type: integer
+          description: Policy deductible amount in USD
+          example: 1000
+        additionalLivingExpenses:
+          type: boolean
+          description: Whether additional living expenses coverage is included
+          example: true
+        identityRestorationCoverage:
+          type: boolean
+          description: Whether identity restoration coverage is included
+          example: false
     QuoteResponse:
       type: object
       description: Renters insurance quote details
@@ -156,99 +249,6 @@ components:
           type: string
           description: Human-readable quote number for reference
           example: 2026-Q-987654
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    TenantInfo:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - dateOfBirth
-      description: Tenant/applicant personal information
-      properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Smith
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1990-03-15'
-        email:
-          type: string
-          format: email
-          example: jane.smith@email.com
-        phone:
-          type: string
-          example: 555-867-5309
-    QuoteRequest:
-      type: object
-      required:
-      - propertyAddress
-      - tenantInfo
-      - coverageOptions
-      description: Request body for creating a renters insurance quote
-      properties:
-        propertyAddress:
-          $ref: '#/components/schemas/Address'
-        tenantInfo:
-          $ref: '#/components/schemas/TenantInfo'
-        coverageOptions:
-          $ref: '#/components/schemas/CoverageSelection'
-        effectiveDate:
-          type: string
-          format: date
-          description: Desired policy effective date
-          example: '2026-06-01'
-    CoverageSelection:
-      type: object
-      description: Renters insurance coverage selections
-      properties:
-        personalPropertyLimit:
-          type: integer
-          description: Personal property coverage limit in USD
-          example: 25000
-        liabilityLimit:
-          type: integer
-          description: Personal liability coverage limit in USD
-          example: 100000
-        medicalPaymentsLimit:
-          type: integer
-          description: Medical payments to others limit in USD
-          example: 1000
-        deductible:
-          type: integer
-          description: Policy deductible amount in USD
-          example: 1000
-        additionalLivingExpenses:
-          type: boolean
-          description: Whether additional living expenses coverage is included
-          example: true
-        identityRestorationCoverage:
-          type: boolean
-          description: Whether identity restoration coverage is included
-          example: false
   securitySchemes:
     OAuth2:
       type: oauth2
