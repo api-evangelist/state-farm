@@ -90,64 +90,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    PolicyBindRequest:
-      type: object
-      required:
-      - quoteId
-      - paymentMethod
-      - paymentFrequency
-      description: Request to bind a renters insurance policy from a quote
-      properties:
-        quoteId:
-          type: string
-          description: Quote ID to bind into a policy
-          example: QT-2026-789456
-        paymentMethod:
-          type: string
-          description: Payment method type
-          enum:
-          - CREDIT_CARD
-          - BANK_DRAFT
-          - ELECTRONIC_CHECK
-          example: BANK_DRAFT
-        paymentFrequency:
-          type: string
-          description: How often premiums are billed
-          enum:
-          - MONTHLY
-          - ANNUALLY
-          example: MONTHLY
-        effectiveDate:
-          type: string
-          format: date
-          description: Policy effective date
-          example: '2026-06-01'
-        additionalInterests:
-          type: array
-          description: Additional interest parties (e.g., landlords, lenders)
-          items:
-            $ref: '#/components/schemas/AdditionalInterest'
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     CoverageSelection:
       type: object
       description: Renters insurance coverage selections
@@ -195,6 +137,89 @@ components:
           example: Acme Property Management LLC
         address:
           $ref: '#/components/schemas/Address'
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    PolicyBindRequest:
+      type: object
+      required:
+      - quoteId
+      - paymentMethod
+      - paymentFrequency
+      description: Request to bind a renters insurance policy from a quote
+      properties:
+        quoteId:
+          type: string
+          description: Quote ID to bind into a policy
+          example: QT-2026-789456
+        paymentMethod:
+          type: string
+          description: Payment method type
+          enum:
+          - CREDIT_CARD
+          - BANK_DRAFT
+          - ELECTRONIC_CHECK
+          example: BANK_DRAFT
+        paymentFrequency:
+          type: string
+          description: How often premiums are billed
+          enum:
+          - MONTHLY
+          - ANNUALLY
+          example: MONTHLY
+        effectiveDate:
+          type: string
+          format: date
+          description: Policy effective date
+          example: '2026-06-01'
+        additionalInterests:
+          type: array
+          description: Additional interest parties (e.g., landlords, lenders)
+          items:
+            $ref: '#/components/schemas/AdditionalInterest'
+    Address:
+      type: object
+      required:
+      - street
+      - city
+      - state
+      - zipCode
+      description: US property address
+      properties:
+        street:
+          type: string
+          description: Street address including unit number
+          example: 123 Main St, Apt 4B
+        city:
+          type: string
+          description: City name
+          example: Chicago
+        state:
+          type: string
+          description: Two-letter US state code
+          example: IL
+        zipCode:
+          type: string
+          description: ZIP or ZIP+4 postal code
+          example: '60601'
     PolicyResponse:
       type: object
       description: Renters insurance policy details
@@ -241,31 +266,6 @@ components:
           example: Jane Smith
         propertyAddress:
           $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      required:
-      - street
-      - city
-      - state
-      - zipCode
-      description: US property address
-      properties:
-        street:
-          type: string
-          description: Street address including unit number
-          example: 123 Main St, Apt 4B
-        city:
-          type: string
-          description: City name
-          example: Chicago
-        state:
-          type: string
-          description: Two-letter US state code
-          example: IL
-        zipCode:
-          type: string
-          description: ZIP or ZIP+4 postal code
-          example: '60601'
   securitySchemes:
     OAuth2:
       type: oauth2
