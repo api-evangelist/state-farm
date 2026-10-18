@@ -128,7 +128,7 @@ apis:
   baseURL: https://api.statefarm.com/v1
   tags:
   - Insurance
-  - Homeowners Insurance
+  - Home Insurance
   - Mortgage
   - Real Estate
   - Partners
